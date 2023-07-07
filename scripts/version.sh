@@ -2,7 +2,7 @@
 set -euo pipefail
 
 function main() {
-  local CMD="pnpm version --no-git-tag-version -m \"Upgrade to v%s\" "
+  local CMD="pnpm version --no-git-tag-version "
 
   case "$1" in
   "major" | "minor" | "patch")
