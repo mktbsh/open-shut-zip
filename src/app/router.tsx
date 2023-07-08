@@ -1,6 +1,7 @@
 import { createHashRouter } from "react-router-dom";
 import { BaseLayout } from "./layouts/BaseLayout";
 import { SettingsPage } from "@/pages/settings";
+import { ZipPage } from "@/pages/zip";
 
 export function initRouter() {
   return createHashRouter([
@@ -10,15 +11,7 @@ export function initRouter() {
       children: [
         {
           index: true,
-          element: <h1>Index</h1>,
-        },
-        {
-          path: "/gzip",
-          element: <h1>to Gzip</h1>,
-        },
-        {
-          path: "/zip",
-          element: <h1>to Zip</h1>,
+          element: <ZipPage />,
         },
         {
           path: "/settings",

@@ -5,16 +5,8 @@ import { Outlet } from "react-router-dom";
 
 const sidebarNavItems = [
   {
-    title: "Index",
+    title: "zip",
     href: "/",
-  },
-  {
-    title: "to Gzip",
-    href: "/gzip",
-  },
-  {
-    title: "to Zip",
-    href: "/zip",
   },
   {
     title: "Settings",
@@ -40,7 +32,7 @@ export function BaseLayout() {
           <aside className="-mx-4 lg:w-1/5">
             <Sidebar items={sidebarNavItems} />
           </aside>
-          <div className="flex-1 lg:max-w-2xl">
+          <div className="flex-1">
             <Outlet />
           </div>
         </div>
