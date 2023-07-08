@@ -1,11 +1,28 @@
 import { Separator } from "@/shared/ui/separator";
 import { MobileHero } from "@/widgets/MobileHero";
+import { Sidebar } from "@/widgets/Sidebar";
+import { Outlet } from "react-router-dom";
 
-type BaseLayoutProps = {
-  children: React.ReactNode;
-};
+const sidebarNavItems = [
+  {
+    title: "Index",
+    href: "/",
+  },
+  {
+    title: "to Gzip",
+    href: "/gzip",
+  },
+  {
+    title: "to Zip",
+    href: "/zip",
+  },
+  {
+    title: "Settings",
+    href: "/settings",
+  },
+];
 
-export function BaseLayout({ children }: BaseLayoutProps) {
+export function BaseLayout() {
   return (
     <>
       <div className="md:hidden">
@@ -20,8 +37,12 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         </div>
         <Separator className="my-6" />
         <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
-          <aside className="-mx-4 lg:w-1/5">Side nav</aside>
-          <div className="flex-1 lg:max-w-2xl">{children}</div>
+          <aside className="-mx-4 lg:w-1/5">
+            <Sidebar items={sidebarNavItems} />
+          </aside>
+          <div className="flex-1 lg:max-w-2xl">
+            <Outlet />
+          </div>
         </div>
       </div>
     </>
