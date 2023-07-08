@@ -2,7 +2,13 @@
 
 module.exports = {
   root: true,
-  ignorePatterns: ["**/*.cjs", "**/*.config.*", "public/**/*.js", "docs/**/*"],
+  ignorePatterns: [
+    "**/*.cjs",
+    "**/*.config.*",
+    "public/**/*.js",
+    "docs/**/*",
+    "*.yaml",
+  ],
   env: { browser: true, es2020: true },
   extends: [
     "eslint:recommended",
