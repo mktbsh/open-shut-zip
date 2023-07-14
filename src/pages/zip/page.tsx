@@ -117,7 +117,7 @@ export function ZipPage() {
         />
       </div>
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption>A list of imported files.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="max-w-xs">Filename</TableHead>
