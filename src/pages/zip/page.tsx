@@ -13,10 +13,12 @@ import {
 } from "@/shared/ui/table";
 import { byteToUnit } from "./lib/file";
 import { toZip } from "@/shared/lib/fflate";
+import { Input } from "@/shared/ui/input";
 
 export function ZipPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [mode, setMode] = useState<CompressMode>("zip");
+  const [zipName, setZipName] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [isCompressing, setIsCompressing] = useState<boolean>(false);
 
@@ -48,11 +50,13 @@ export function ZipPage() {
 
   async function downloadZip() {
     setIsCompressing(true);
+
+    const zipFileName = zipName ? zipName.replace(".zip", "") : Date.now();
     let zipFile: File | undefined = undefined;
     switch (mode) {
       case "zip":
         zipFile = await toZip({
-          filename: `${Date.now()}.zip`,
+          filename: `${zipFileName}.zip`,
           files: files,
         });
         setIsCompressing(false);
@@ -73,6 +77,9 @@ export function ZipPage() {
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+
+    setFiles([]);
+    setZipName("");
   }
 
   function handleDownloadZip() {
@@ -94,6 +101,12 @@ export function ZipPage() {
   return (
     <div className="h-full px-4 py-6 lg:px-8 space-y-6">
       <div className="justify-end flex items-center space-x-2">
+        <Input
+          placeholder="zip name"
+          className="max-w-[200px] border-gray-500"
+          value={zipName}
+          onChange={e => setZipName(e.target.value)}
+        />
         <CompressModeSelect
           defaultValue={mode}
           onModeChange={mode => setMode(mode)}
