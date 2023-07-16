@@ -14,12 +14,17 @@ import {
 import { byteToUnit } from "./lib/file";
 import { toZip } from "@/shared/lib/fflate";
 import { Input } from "@/shared/ui/input";
+import {
+  CompressionLevel,
+  CompressionLevelMenu,
+} from "@/entities/compression-level";
 
 export function ZipPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [mode, setMode] = useState<CompressMode>("zip");
   const [zipName, setZipName] = useState("");
   const [files, setFiles] = useState<File[]>([]);
+  const [compressLevel, setCompressLevel] = useState<CompressionLevel>(6);
   const [isCompressing, setIsCompressing] = useState<boolean>(false);
 
   const existFile = files.length > 0;
@@ -58,6 +63,9 @@ export function ZipPage() {
         zipFile = await toZip({
           filename: `${zipFileName}.zip`,
           files: files,
+          compressOptions: {
+            level: compressLevel,
+          },
         });
         setIsCompressing(false);
         break;
@@ -110,6 +118,10 @@ export function ZipPage() {
         <CompressModeSelect
           defaultValue={mode}
           onModeChange={mode => setMode(mode)}
+        />
+        <CompressionLevelMenu
+          value={compressLevel}
+          onChangeLevel={setCompressLevel}
         />
         <Button className="h-full" onClick={handleClickAddFiles}>
           Add files

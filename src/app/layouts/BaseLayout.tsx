@@ -1,6 +1,7 @@
 import { Separator } from "@/shared/ui/separator";
 import { MobileHero } from "@/widgets/MobileHero";
 import { Sidebar } from "@/widgets/Sidebar";
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 const sidebarNavItems = [
@@ -33,7 +34,9 @@ export function BaseLayout() {
             <Sidebar items={sidebarNavItems} />
           </aside>
           <div className="flex-1">
-            <Outlet />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Outlet />
+            </Suspense>
           </div>
         </div>
       </div>
